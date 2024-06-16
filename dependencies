@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# install dev libraries to game development
+sudo apt update
+sudo apt install -y libsdl2-dev

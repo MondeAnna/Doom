@@ -1,0 +1,10 @@
+# everything
+*
+
+# scripts
+!.gitignore
+!dependencies
+
+# src
+!*.c
+!*.md

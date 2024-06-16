@@ -8,6 +8,20 @@
 #define FALSE		0
 
 /**
+ * drawPlayer - draws player onto the renderer
+ * @renderer: the backdrop in use
+ * @player: the player object
+ * Return: void
+ */
+void drawPlayer(SDL_Renderer *renderer, SDL_Rect *player)
+{
+	/* set colour to white */
+	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+	SDL_RenderDrawRect(renderer, player);
+	SDL_RenderPresent(renderer);
+}
+
+/**
  * handleEvent - processes event/input
  * @event: the event/input
  * @player: the player object
@@ -36,6 +50,19 @@ int handleEvent(SDL_Event *event, SDL_Rect *player)
 	return (TRUE);
 }
 
+
+/**
+ * darkenBackdrop - darkens the backdrop
+ * @renderer: backdrop to be darkened
+ * Return: void
+ */
+void darkenBackdrop(SDL_Renderer *renderer)
+{
+	/* set colour to black */
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+	SDL_RenderClear(renderer);
+}
+
 /**
  * main - entry point
  *
@@ -55,22 +82,11 @@ int main(int argc, char **argv)
 	SDL_CreateWindowAndRenderer(SCREEN_WIDTH, SCREEN_HEIGHT, 0, &window, &renderer);
 	SDL_SetWindowTitle(window, "Doom by Monde Anna");
 
-	/* set colour to black */
-	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-	SDL_RenderClear(renderer);
-
 	SDL_Rect player = {SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, PLAYER_SIZE, PLAYER_SIZE};
 
 	do {
-		/* set colour to white */
-		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-		SDL_RenderDrawRect(renderer, &player);
-		SDL_RenderPresent(renderer);
-
-		/* set colour to black */
-		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-		SDL_RenderClear(renderer);
-
+		darkenBackdrop(renderer);
+		drawPlayer(renderer, &player);
 	} while(handleEvent(&event, &player));
 
 	SDL_DestroyWindow(window);

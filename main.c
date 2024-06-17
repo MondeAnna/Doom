@@ -50,6 +50,9 @@ int handleEvent(SDL_Event *event)
 		if (event->type == SDL_QUIT)
 			return (FALSE);
 
+		if (event->key.keysym.sym == SDLK_ESCAPE)
+			return (FALSE);
+		}
 	}
 
 	return (TRUE);
